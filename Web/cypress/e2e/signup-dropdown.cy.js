@@ -1,15 +1,16 @@
 describe("Signup Dropdown Tests", () => {
     beforeEach(() => {
-      // Ignore uncaught exceptions that come from CAPTCHA or other sources
+      
       cy.on('uncaught:exception', (err, runnable) => {
-        // Check if the error message is related to CAPTCHA failure
+        
         if (err.message.includes('Failed to validate CAPTCHA')) {
-          return false;  // Prevent the test from failing
+          return false;  
         }
-        return true;  // Let other errors propagate
+        return true;  
       });
   
       cy.visit("https://app.circula.com/users/sign_up");
+      
     });
   
     it("Should contain Sweden in the country dropdown", () => {
@@ -19,8 +20,6 @@ describe("Signup Dropdown Tests", () => {
     
       cy.xpath('//input[@type="email"]').type('testautomation@abccompany.com', { force: true });
       cy.xpath('//input[@type="password"]').type('Qwerty123$', { force: true });
-      
-      // Wait for the element to be visible and ensure it's interactable
       cy.xpath('//*[@class="sc-eb60ccfc-0 sc-b2fd84a5-0 cwxtiA bdaTRN"]//input')
         .should('be.visible')  
         .click({ force: true });
